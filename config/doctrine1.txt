@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Configuration file for Doctrine DBAL
  */

@@ -1,0 +1,15 @@
+{# On hérite de base.html.twig: on recupere le meùme structure HTML eton remplace certains blocs#}
+{% extends "base.html.twig" %}
+
+{# On écrase le bloc "title" #}
+{% block title %}
+
+Share It!
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Share It!</h1>
+
+{% endblock %}

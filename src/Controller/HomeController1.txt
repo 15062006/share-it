@@ -1,0 +1,32 @@
+ <?php
+
+namespace App\Controller;
+
+use Doctrine\DBAL\Connection;
+use Psr\Http\Message\ResponseInterface;
+
+class HomeController extends AbstractController
+{
+    public function homepage(ResponseInterface $response, Connection $connection)
+    {
+        $database = $connection->getDatabase();
+
+        return $this->template($response, 'home.html.twig', [
+            'database_name' => $database,
+            'users' => ['Pierre', 'Paul', 'Jacque'],
+            'XSS' => '<script>window.alert("Coucou");</script>'
+        ]);
+    }
+
+    public function test()
+    {
+        return $this->redirect('about');
+    }
+
+    public function about(ResponseInterface $response)
+    {
+         $response->getBody()->write('<h1>A propos</h1>');
+         return $response;
+    }
+
+}

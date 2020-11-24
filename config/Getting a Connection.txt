@@ -1,0 +1,21 @@
+<?php
+//..
+$connectionParams = array(
+    'dbname' => 'mydb',
+    'user' => 'user',
+    'password' => 'secret',
+    'host' => 'localhost',
+    'driver' => 'pdo_mysql',
+);
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
+
+..........................
+
+<?php
+//..
+$connectionParams = array(
+    'url' => 'mysql://user:secret@localhost/mydb',
+);
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
+
+................................

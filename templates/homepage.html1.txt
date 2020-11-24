@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,10 +39,6 @@
                             {{ user }}<br>
 
                         {% endfor %}
-
-                       {# {{ XSS | raw }} #}
-
-                        <a href="{{ link('test')}}">Test</a>
 
                         <figure class="image">
                             <img src="https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif" alt="Welcome GIF">
