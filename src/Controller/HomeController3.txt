@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Controller;
+
+use Doctrine\DBAL\Connection;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UploadedFileInterface;
+
+class HomeController extends AbstractController
+{
+    public function homepage(
+        ResponseInterface $response, 
+        ServerRequestInterface $request, 
+        Connection $connection)
+    {
+        // Récupérer les fichiers envoyés:
+        $listeFichiers = $request->getUploadedFiles();
+
+        // Si le formulaire est envoyé
+        if (isset($listeFichiers['fichier'])) {
+            /** @var UploadedFileInterface $fichier */
+             $fichier = $listeFichiers['fichier'];
+
+            // Générer un nom de fichier unique:
+            // horodatage + chaine de caractères aléatoires + extension
+                $filename = date('YmdHis');
+                $filename .= bin2hex(random_bytes(8));
+                $filename .= '.' . pathinfo($fichier->getClientFilename(), PATHINFO_EXTENSION);
+
+            // Construire le chemin de destination du fichier:
+            // chemin vers le dossier /files/ + nouveau nom de fichier
+
+             $path = __DIR__ . '/../../files/' . $filename;
+
+            // Déplacer le fichier
+            $fichier->moveTo($path);
+        }
+
+        return $this->template($response, 'home.html.twig');
+    }
+
+    public function download(ResponseInterface $response, int $id)
+    {
+        $response->getBody()->write(sprintf('Identifiant: %d', $id));
+        return $response;
+    }
+}

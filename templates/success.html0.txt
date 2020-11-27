@@ -1,0 +1,20 @@
+ {% extends "base.html.twig" %}
+
+{% block title %}
+
+Votre fichier a été Chargé!
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Votre fichier a été Chargé!</h1>
+<p>
+{# On accède aux proriétés / méthodes avec le point
+Twig essaie automatiquement d'appeler le getter: getNomOriginal() #}
+Le fichier <b>{{ fichier.getNomOriginal }}</b> a été Chargé,
+vous pouvez copier le lien de téléchargement ci-dessous:
+</p>
+<imput type="text" class="form-control" value="{{ Link()}}">
+
+{% endblock %}
